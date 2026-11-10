@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paper Ink PDF Editor</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Browser PDF Editor</p>
+        <h1>Paper Ink</h1>
+        <p class="hero-copy">
+          Drop in a PDF, click where you want new text, then download an updated copy.
+          Everything happens in the browser.
+        </p>
+      </div>
+      <div class="hero-card">
+        <p class="hero-card__label">Quick flow</p>
+        <ol class="hero-card__list">
+          <li>Upload a PDF</li>
+          <li>Add and move text boxes</li>
+          <li>Download the edited file</li>
+        </ol>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <aside class="control-panel">
+        <section class="panel-section">
+          <label class="file-picker" for="pdf-upload">
+            <span>Choose PDF</span>
+            <input id="pdf-upload" type="file" accept="application/pdf">
+          </label>
+          <p class="helper-text">PDFs stay local to your browser session.</p>
+        </section>
+
+        <section class="panel-section">
+          <div class="section-heading">
+            <h2>Tools</h2>
+            <p>Click add text, then tap any page.</p>
+          </div>
+          <div class="button-row">
+            <button id="add-text-button" class="button button--primary" type="button" disabled>Add Text</button>
+            <button id="delete-text-button" class="button button--ghost" type="button" disabled>Delete Selected</button>
+          </div>
+          <button id="download-button" class="button button--accent" type="button" disabled>Download Edited PDF</button>
+        </section>
+
+        <section class="panel-section">
+          <div class="section-heading">
+            <h2>Text Style</h2>
+            <p>These settings apply to the selected text box.</p>
+          </div>
+
+          <label class="control-field" for="font-size">
+            <span>Font size</span>
+            <div class="range-wrap">
+              <input id="font-size" type="range" min="10" max="48" step="1" value="18" disabled>
+              <strong id="font-size-value">18 px</strong>
+            </div>
+          </label>
+
+          <label class="control-field color-field" for="font-color">
+            <span>Text color</span>
+            <input id="font-color" type="color" value="#1f2937" disabled>
+          </label>
+
+          <label class="control-field" for="text-editor">
+            <span>Selected text</span>
+            <textarea id="text-editor" rows="5" placeholder="Select a text box to edit it." disabled></textarea>
+          </label>
+        </section>
+
+        <section class="panel-section">
+          <div class="section-heading">
+            <h2>View</h2>
+            <p>Zoom in while placing text if you need more precision.</p>
+          </div>
+
+          <label class="control-field" for="zoom-level">
+            <span>Canvas zoom</span>
+            <div class="range-wrap">
+              <input id="zoom-level" type="range" min="1" max="2.2" step="0.1" value="1.4" disabled>
+              <strong id="zoom-level-value">140%</strong>
+            </div>
+          </label>
+        </section>
+
+        <section class="panel-section panel-section--status">
+          <div class="section-heading">
+            <h2>Status</h2>
+            <p id="status-text">Upload a PDF to get started.</p>
+          </div>
+          <p id="document-meta" class="document-meta">No file loaded yet.</p>
+        </section>
+      </aside>
+
+      <section class="canvas-panel">
+        <div id="empty-state" class="empty-state">
+          <div class="empty-state__card">
+            <p class="eyebrow">Ready when you are</p>
+            <h2>Upload a PDF to start editing</h2>
+            <p>
+              Once your document is loaded, each page will appear here. Use
+              <strong>Add Text</strong> to place text anywhere on the PDF, then export it.
+            </p>
+          </div>
+        </div>
+
+        <div id="page-container" class="page-container" aria-live="polite"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
